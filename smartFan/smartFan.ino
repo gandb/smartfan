@@ -157,13 +157,16 @@ void print(bool humity, int value)
 }
 
 void zeroCross()  {
-  if (percent>100) percent=100;
-  if (percent<0) percent=0;
-  long t1 = 8200L * (100L - percent) / 100L;      
-  delayMicroseconds(t1);   
+ if (percent>=100) percent=100;
+  if (percent<=0) percent=0;
+
+  const long sleepLow = map(100-percent,0,100,2000,8000);
+  delayMicroseconds(sleepLow);      
+
   digitalWrite(PINO_DIM, HIGH);  
-  delayMicroseconds(6);      // t2
-  digitalWrite(PINO_DIM, LOW);   
+  const long sleepHight = 10;
+  delayMicroseconds(sleepHight);     
+  digitalWrite(PINO_DIM, LOW);  
 }
 
  
